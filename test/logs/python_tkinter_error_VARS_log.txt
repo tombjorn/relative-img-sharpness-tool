@@ -1,0 +1,9 @@
+--- tool.py ----
+_VAR BEFORE LAYOUT : {'window': False}
+_VARS AFTER GUI ASIGNMENT : {'window': <PySimpleGUI.PySimpleGUI.Window object at 0x116962050>}
+_VARS INSIDE WHILE LOOP : {'window': <PySimpleGUI.PySimpleGUI.Window object at 0x116962050>}
+
+---- main.py ----
+BEFORE LAYOUT {'window': False}
+_VARS RETURNED FROM CREATE_GUI() :{'window': <PySimpleGUI.PySimpleGUI.Window object at 0x11c40c6d0>}
+_VARS INSIDE WHILE LOOP: {'window': <PySimpleGUI.PySimpleGUI.Window object at 0x11c40c6d0>}

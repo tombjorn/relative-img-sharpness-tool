@@ -1,11 +1,7 @@
 App measures the relative sharpness of a set of pictures, selected by directory.
 Graphs the pictures based on this relative sharpness value, and given the app is on OSX, adds an appropriate colour tag to the files.
 
-Run - python main.py threshold 'image-folder-path' 
-
-threshold - float 0-1
-
-image-folder-path - path of folder containing images to analyse, cannot be sibling directory
+Run - python main.py  
 
 References:
 
@@ -13,3 +9,7 @@ References:
   Zhaoyang Liu , Huajie Hong, Zihao Gan, Jianhua Wang and Yaping Chen,
   Applied Sciences.
   Source : https://www.mdpi.com/2076-3417/12/13/6712/pdf
+
+TODO:
+    - add mouse hover over graph points, index images by number, somehow able to open picture
+        - could have a list selector to pick and open the picture by picture number in graph?

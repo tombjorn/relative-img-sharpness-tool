@@ -128,7 +128,33 @@ class Picture():
         else:
             mt.add(tag_3, file=self.filepath)
 
+def threshold_cli():
+    print('need to import tkinter')
+    """
+    threshold = float(input('Threshold: '))
+    while True:
+        if isinstance(threshold, float) and 0.0 < threshold < 1.0:
+            return threshold
+        try:
+            threshold = float(input('Threshold: '))
+        except ValueError:
+            print('Threshold must be a float 0 - 1')
 
-
+        """
+    
+def path_cli():
+    print('need to import tkinter')
+    """
+    path = askdirectory(title='Select Folder')
+    while True:
+        print(f'Current Path = {path} \n')
+        dir_choice = str(input(f'confirm image folder path? [y/n]\n'))
+        if (dir_choice.lower() == 'y'):
+            return path
+        path = askdirectory(title='Select Folder')
+"""
             
-        
+def open_image(data, number):
+    path = data[number].filepath
+    # loaded_img = Image.open(path)
+    # loaded_img.show()

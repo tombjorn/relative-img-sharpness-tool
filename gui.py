@@ -1,10 +1,9 @@
 import PySimpleGUI as gui
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
 
 from modules import (draw_plot)
 
-_VARS = {'window' : False}
-plot_generated = False
 
 
 
@@ -30,28 +29,49 @@ def draw_figure(figure, canvas):
 
 
 def create_gui():
+    _VARS = {'window' : False}
+    plot_generated = False
+
     AppFont = 'Any 16'
     gui.theme('LightBrown7')
     mainCol = '#f6c89f'
     secondCol = '#396362'
     accentCol = '#f7f9f9'
-    
+
+    print(f'BEFORE LAYOUT {_VARS}')
+
     exitCol = [[gui.Button('EXIT', font=AppFont)]]
 
     layout = [[gui.Button("PICK A FOLDER", font=AppFont)],
             [gui.Text("DIRECTORY PATH : ", key="DIR PATH",
                     justification='c', font=AppFont)],
             [gui.Button("SHOW PLOT", font=AppFont)],
-            [gui.Button("PICK DESTINATION", font=AppFont)],
-            [gui.Text("DESTINATION PATH : ",  key='DEST PATH', font=AppFont)],
-            [gui.Button("FILTER FILES", font=AppFont)],
-            [gui.Text("", key="progress", font=AppFont)],
             [gui.Canvas(key='figCanvas')],
+            [gui.Text('Show Image:', size =(15, 1))],
+            [gui.InputText()],
+            [gui.Submit()], 
             [gui.Column(exitCol, element_justification='right', expand_x=True)]
             ]
-
     _VARS['window'] = gui.Window('Relative Sharpness Tool',
                                 layout,
                                 finalize=True,
                                 resizable=True)
+    return _VARS
 
+def generate_plot_fig(data, mean, std, window, face_col='#fff'):
+    print(face_col['main'])
+    fig = plt.figure()
+    ax = plt.axes()
+    ax.set_facecolor(face_col['main'])
+
+    plt.scatter(x=data['x'], y=data['y'], c=data['col'])
+    plt.axhline(y=mean, c=face_col['acc'])
+    plt.axhline(y=mean - std, c='black', linestyle="dashed")
+    plt.axhline(y=mean + std, c='black', linestyle="dashed")
+    plt.xlabel("Picture Number", fontweight='bold', c=face_col['sec'])
+    plt.ylabel("Relative Sharpness", fontweight='bold', c=face_col['sec'])
+
+    fig.set_facecolor(face_col['main'])
+    draw_figure(fig, window['window']['figCanvas'].TKCanvas)
+
+    

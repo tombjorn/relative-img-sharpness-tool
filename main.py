@@ -4,11 +4,46 @@ import asyncio
 import sys
 from tkinter.filedialog import askdirectory
 
+LightBrown7 = {"main" : '#f6c89f', 
+               "sec" : '#396362',
+               "acc" : '#f7f9f9'}
 
 def main():
+    plot_generated = False
+    threshold = float(sys.argv[1])
+    gui = create_gui()
 
-    # threshold = float(sys.argv[1])
-    # path = str(sys.argv[2])
+    # print(f'_VARS RETURNED FROM CREATE_GUI() :{gui}')
+
+    while True:
+        print(f'_VARS INSIDE WHILE LOOP: {gui}')
+
+        event, values = gui['window'].read(timeout=200)
+        if event == 'EXIT':
+            print('exit event')
+            break
+
+        if event == "PICK A FOLDER":
+            path = askdirectory(title='Image directory')
+            gui['window']['DIR PATH'].update(f'DIRECTORY PATH : {path}')
+
+        if event == "SHOW PLOT" and plot_generated == False:
+            print('Generating picture instance list')
+            pictures = generate_pictures(path)
+            sharp_m = mean(pictures)
+            sharp_s = std(pictures)
+            for p in pictures:
+                img = p['instance']
+                img.get_col(t=threshold, m=sharp_m, s=sharp_s)
+
+            axes_data = format_axes(pictures)
+            generate_plot_fig(axes_data, sharp_m, sharp_s, gui, face_col=LightBrown7)
+            plot_generated = True
+
+
+    return
+
+    # gui.close()
 
     print('Generating picture instance list')
     pictures = generate_pictures(path)
@@ -35,29 +70,10 @@ def main():
     print('DONE')
 
 
-# SHOULD DO A REGEX TEST TO MAKE SURE THRESH IS FLOAT AND DIR IS PATH
-path = askdirectory(title='Select Folder')
-
-
-threshold = float(input('Threshold: '))
-while True:
-    if isinstance(threshold, float) and 0.0 < threshold < 1.0:
-        break
-    try:
-        threshold = float(input('Threshold: '))
-    except ValueError:
-        print('Threshold must be a float 0 - 1')
-
-while True:
-    print(f'Current Path = {path} \n')
-    dir_choice = str(input(f'confirm image folder path? [y/n]\n'))
-    if (dir_choice.lower() == 'y'):
-        break
-    path = askdirectory(title='Select Folder')
 
 # main(path, threshold)
-create_gui()
 
+main()
     
 
 
