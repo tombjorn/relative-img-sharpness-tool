@@ -7,9 +7,9 @@ threshold - float 0-1
 
 image-folder-path - path of folder containing images to analyse, cannot be sibling directory
 
-Appendix :
+References:
 
 - "An Improved Method for Evaluating Image Sharpness Based on Edge Information",
   Zhaoyang Liu , Huajie Hong, Zihao Gan, Jianhua Wang and Yaping Chen,
   Applied Sciences.
-  Source : file:///Users/thomasbacon/Downloads/applsci-12-06712-v2.pdf
+  Source : https://www.mdpi.com/2076-3417/12/13/6712/pdf
