@@ -55,10 +55,3 @@ def create_gui():
                                 finalize=True,
                                 resizable=True)
 
-def run_gui():
-
-    while True:
-        event, values = _VARS['window'].read(timeout=200)
-        if event == gui.WIN_CLOSED or event == 'EXIT':
-            return {0: 'closed with exit'}
-        if event == 'PICK A FOLDER'
