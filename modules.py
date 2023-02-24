@@ -48,7 +48,6 @@ def format_axes(pictures):
         col.append(picture.colour)
     return {'x':x, 'y':y, 'col':col}
 
-
 def draw_plot(data, mean):
     plt.title('Relative Sharpness')
     plt.scatter(x=data['x'], y=data['y'], c=data['col'])

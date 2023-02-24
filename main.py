@@ -1,11 +1,14 @@
 from modules import *
+from gui import *
 import asyncio
 import sys
+from tkinter.filedialog import askdirectory
+
 
 def main():
 
-    threshold = float(sys.argv[1])
-    path = str(sys.argv[2])
+    # threshold = float(sys.argv[1])
+    # path = str(sys.argv[2])
 
     print('Generating picture instance list')
     pictures = generate_pictures(path)
@@ -33,12 +36,28 @@ def main():
 
 
 # SHOULD DO A REGEX TEST TO MAKE SURE THRESH IS FLOAT AND DIR IS PATH
-if len(sys.argv) == 1:
-    cli_error()
-elif sys.argv[1] == 'help':
-    get_help()
-else:
-    main()
+path = askdirectory(title='Select Folder')
+
+
+threshold = float(input('Threshold: '))
+while True:
+    if isinstance(threshold, float) and 0.0 < threshold < 1.0:
+        break
+    try:
+        threshold = float(input('Threshold: '))
+    except ValueError:
+        print('Threshold must be a float 0 - 1')
+
+while True:
+    print(f'Current Path = {path} \n')
+    dir_choice = str(input(f'confirm image folder path? [y/n]\n'))
+    if (dir_choice.lower() == 'y'):
+        break
+    path = askdirectory(title='Select Folder')
+
+# main(path, threshold)
+create_gui()
+
     
 
 
