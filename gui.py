@@ -24,6 +24,15 @@ mainCol = '#282923'
 secondCol = '#284b5b'
 accentCol = '#dacf6f'
 
+# LightBrown7 = {"main" : '#f6c89f', 
+#                "sec" : '#396362',
+#                "acc" : '#f7f9f9'}
+# Topanga = {"main" : '#282923', 
+#                "sec" : '#284b5b',
+#                "acc" : '#dacf6f'}
+# BrightColors = {"main": '#b4fab4',
+#                 "sec": '#ffa0dc',
+#                 "acc": '#5d384f'}
 """
 
 def draw_figure(figure, canvas):
@@ -33,17 +42,12 @@ def draw_figure(figure, canvas):
     return figure_canvas_agg
 
 
-def create_gui():
+def create_gui(theme):
     _VARS = {'window' : False}
     plot_generated = False
 
     AppFont = 'Any 16'
-    gui.theme('Topanga')
-    mainCol = '#282923'
-    secondCol = '#284b5b'
-    accentCol = '#dacf6f'
-
-    # print(f'BEFORE LAYOUT {_VARS}')
+    gui.theme(theme)
 
     exitCol = [[gui.Button('EXIT', font=AppFont)]]
 

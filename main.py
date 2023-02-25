@@ -5,21 +5,28 @@ import sys
 from tkinter.filedialog import askdirectory
 import traceback
 
-LightBrown7 = {"main" : '#f6c89f', 
-               "sec" : '#396362',
-               "acc" : '#f7f9f9'}
-Topanga = {"main" : '#282923', 
-               "sec" : '#284b5b',
-               "acc" : '#dacf6f'}
 
-themes = { "LightBrown7" : LightBrown7,
-          "Topanga" : Topanga }
+
+themes = { "LightBrown7" : 
+            {"main" : '#f6c89f', 
+            "sec" : '#396362',
+            "acc" : '#f7f9f9'},
+          "Topanga" : 
+            {"main" : '#282923', 
+            "sec" : '#284b5b',
+            "acc" : '#dacf6f'}, 
+          "BrightColors" : 
+            {"main": '#b4fab4',
+            "sec": '#ffa0dc',
+            "acc": '#5d384f'}}
+
 
 def main():
     global pictures
     plot_generated = False
     threshold = float(sys.argv[1])
-    gui = create_gui()
+    theme = 'LightBrown7'
+    gui = create_gui(theme)
 
     # print(f'_VARS RETURNED FROM CREATE_GUI() :{gui}')
     pictures = []
@@ -48,7 +55,7 @@ def main():
                     img.get_col(t=threshold, m=sharp_m, s=sharp_s)
 
                 axes_data = format_axes(pictures)
-                generate_plot_fig(axes_data, sharp_m, sharp_s, gui, face_col=themes['Topanga'])
+                generate_plot_fig(axes_data, sharp_m, sharp_s, gui, face_col=themes[theme])
                 plot_generated = True
             except UnboundLocalError:
                 traceback.print_exc()
