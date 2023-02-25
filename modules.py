@@ -4,6 +4,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import macos_tags as mt
+import traceback
 
 
 
@@ -43,7 +44,7 @@ def format_axes(pictures):
     col = []
     for idx, p in enumerate(pictures):
         picture = p['instance']
-        x.append(idx)
+        x.append(idx + 1)
         y.append(picture.sharpness)
         col.append(picture.colour)
     return {'x':x, 'y':y, 'col':col}
@@ -155,6 +156,14 @@ def path_cli():
 """
             
 def open_image(data, number):
-    path = data[number].filepath
-    # loaded_img = Image.open(path)
-    # loaded_img.show()
+    try:
+        path = data[number]['filepath']
+        loaded_img = Image.open(path)
+        loaded_img.show()
+
+    except IndexError as i:
+        traceback.print_exc()
+        return
+
+
+

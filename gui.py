@@ -19,6 +19,11 @@ mainCol = '#f6c89f'
 secondCol = '#396362'
 accentCol = '#f7f9f9'
 
+for Topanga:
+mainCol = '#282923'
+secondCol = '#284b5b'
+accentCol = '#dacf6f'
+
 """
 
 def draw_figure(figure, canvas):
@@ -33,12 +38,12 @@ def create_gui():
     plot_generated = False
 
     AppFont = 'Any 16'
-    gui.theme('LightBrown7')
-    mainCol = '#f6c89f'
-    secondCol = '#396362'
-    accentCol = '#f7f9f9'
+    gui.theme('Topanga')
+    mainCol = '#282923'
+    secondCol = '#284b5b'
+    accentCol = '#dacf6f'
 
-    print(f'BEFORE LAYOUT {_VARS}')
+    # print(f'BEFORE LAYOUT {_VARS}')
 
     exitCol = [[gui.Button('EXIT', font=AppFont)]]
 
@@ -47,9 +52,9 @@ def create_gui():
                     justification='c', font=AppFont)],
             [gui.Button("SHOW PLOT", font=AppFont)],
             [gui.Canvas(key='figCanvas')],
-            [gui.Text('Show Image:', size =(15, 1))],
-            [gui.InputText()],
-            [gui.Submit()], 
+            [gui.Text('IMAGE NUMBER', key='imgNumber')],
+            [gui.InputText(key='img-number')],
+            [gui.Button("GET IMAGE", font=AppFont)], 
             [gui.Column(exitCol, element_justification='right', expand_x=True)]
             ]
     _VARS['window'] = gui.Window('Relative Sharpness Tool',
@@ -59,18 +64,19 @@ def create_gui():
     return _VARS
 
 def generate_plot_fig(data, mean, std, window, face_col='#fff'):
-    print(face_col['main'])
     fig = plt.figure()
     ax = plt.axes()
-    ax.set_facecolor(face_col['main'])
+    ax.set_facecolor('black')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
 
     plt.scatter(x=data['x'], y=data['y'], c=data['col'])
     plt.axhline(y=mean, c=face_col['acc'])
-    plt.axhline(y=mean - std, c='black', linestyle="dashed")
-    plt.axhline(y=mean + std, c='black', linestyle="dashed")
-    plt.xlabel("Picture Number", fontweight='bold', c=face_col['sec'])
-    plt.ylabel("Relative Sharpness", fontweight='bold', c=face_col['sec'])
-
+    plt.axhline(y=mean - std, c='white', linestyle="dashed")
+    plt.axhline(y=mean + std, c='white', linestyle="dashed")
+    plt.xlabel("Picture Number", fontweight='bold', c=face_col['acc'])
+    plt.ylabel("Relative Sharpness", fontweight='bold', c=face_col['acc'])
+    plt.grid()
     fig.set_facecolor(face_col['main'])
     draw_figure(fig, window['window']['figCanvas'].TKCanvas)
 
