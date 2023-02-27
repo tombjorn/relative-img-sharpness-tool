@@ -3,9 +3,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 # from hover.hover import *
 
-from modules import (draw_plot)
+from modules import (open_image, format_axes)
 
-
+sc = False
 
 
 """
@@ -58,9 +58,6 @@ def create_gui(theme):
                     justification='c', font=AppFont)],
             [gui.Button("SHOW PLOT", font=AppFont)],
             [gui.Canvas(key='figCanvas')],
-            [gui.Text('IMAGE NUMBER', key='imgNumber')],
-            [gui.InputText(key='img-number')],
-            [gui.Button("GET IMAGE", font=AppFont)], 
             [gui.Column(exitCol, element_justification='right', expand_x=True)]
             ]
     _VARS['window'] = gui.Window('Relative Sharpness Tool',
@@ -69,14 +66,26 @@ def create_gui(theme):
                                 resizable=True)
     return _VARS
 
-def generate_plot_fig(data, mean, std, window, face_col='#fff'):
-    fig = plt.figure()
-    ax = plt.axes()
+def generate_plot_fig(pictures, mean, std, window, face_col='#fff'):
+    data = format_axes(pictures)
+    fig, ax = plt.subplots()
     ax.set_facecolor('black')
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
 
-    plt.scatter(x=data['x'], y=data['y'], c=data['col'])
+
+    sc = plt.scatter(x=data['x'], y=data['y'], c=data['col'])
+
+    def onClick(event):
+        cont, ind = sc.contains(event)
+        if cont:
+            idx = ind["ind"][0]
+            # print(data['x'])
+            # print(data['y'])
+            print(pictures[idx])
+            open_image(pictures, idx)
+            
+
     plt.axhline(y=mean, c=face_col['acc'])
     plt.axhline(y=mean - std, c='white', linestyle="dashed")
     plt.axhline(y=mean + std, c='white', linestyle="dashed")
@@ -84,6 +93,7 @@ def generate_plot_fig(data, mean, std, window, face_col='#fff'):
     plt.ylabel("Relative Sharpness", fontweight='bold', c=face_col['acc'])
     plt.grid()
     fig.set_facecolor(face_col['main'])
+    fig.canvas.mpl_connect("button_press_event", onClick)
     draw_figure(fig, window['window']['figCanvas'].TKCanvas)
 
     

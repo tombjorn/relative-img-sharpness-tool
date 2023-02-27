@@ -54,19 +54,10 @@ def main():
                     img = p['instance']
                     img.get_col(t=threshold, m=sharp_m, s=sharp_s)
 
-                axes_data = format_axes(pictures)
-                generate_plot_fig(axes_data, sharp_m, sharp_s, gui, face_col=themes[theme])
+                generate_plot_fig(pictures, sharp_m, sharp_s, gui, face_col=themes[theme])
                 plot_generated = True
             except UnboundLocalError:
                 traceback.print_exc()
-        if event == 'GET IMAGE':
-                try: 
-                    num = int(values['img-number'])
-                    open_image(pictures, num)
-                except NameError: 
-                    traceback.print_exc()
-                except ValueError:
-                    traceback.print_exc()
                 
             
 
