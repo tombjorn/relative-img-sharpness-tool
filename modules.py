@@ -13,6 +13,9 @@ Image.warnings.simplefilter('error', Image.DecompressionBombWarning)
 
 # build array of pictures, might change data structure
 #TODO - Refactor to regex if easier? or select from array of extensions?
+
+# FUNCTIONS
+
 def generate_pictures(img_folder_path):
 
     pictures = []
@@ -80,6 +83,46 @@ def get_help():
     print('Directory - The folder path containing the images to analyse')
     print('\n')
                 
+
+def threshold_cli():
+    print('need to import tkinter')
+    """
+    threshold = float(input('Threshold: '))
+    while True:
+        if isinstance(threshold, float) and 0.0 < threshold < 1.0:
+            return threshold
+        try:
+            threshold = float(input('Threshold: '))
+        except ValueError:
+            print('Threshold must be a float 0 - 1')
+
+        """
+    
+def path_cli():
+    print('need to import tkinter')
+    """
+    path = askdirectory(title='Select Folder')
+    while True:
+        print(f'Current Path = {path} \n')
+        dir_choice = str(input(f'confirm image folder path? [y/n]\n'))
+        if (dir_choice.lower() == 'y'):
+            return path
+        path = askdirectory(title='Select Folder')
+"""
+            
+def open_image(data, number):
+    try:
+        path = data[number]['filepath']
+        loaded_img = Image.open(path)
+        loaded_img.show()
+
+    except IndexError as i:
+        traceback.print_exc()
+        return
+
+
+# CLASSES
+
 class Picture():
     def __init__(self, filepath):
         self.filepath = filepath
@@ -128,42 +171,4 @@ class Picture():
             mt.add(tag_2, file=self.filepath)
         else:
             mt.add(tag_3, file=self.filepath)
-
-def threshold_cli():
-    print('need to import tkinter')
-    """
-    threshold = float(input('Threshold: '))
-    while True:
-        if isinstance(threshold, float) and 0.0 < threshold < 1.0:
-            return threshold
-        try:
-            threshold = float(input('Threshold: '))
-        except ValueError:
-            print('Threshold must be a float 0 - 1')
-
-        """
-    
-def path_cli():
-    print('need to import tkinter')
-    """
-    path = askdirectory(title='Select Folder')
-    while True:
-        print(f'Current Path = {path} \n')
-        dir_choice = str(input(f'confirm image folder path? [y/n]\n'))
-        if (dir_choice.lower() == 'y'):
-            return path
-        path = askdirectory(title='Select Folder')
-"""
-            
-def open_image(data, number):
-    try:
-        path = data[number]['filepath']
-        loaded_img = Image.open(path)
-        loaded_img.show()
-
-    except IndexError as i:
-        traceback.print_exc()
-        return
-
-
 

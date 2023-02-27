@@ -1,6 +1,7 @@
 import PySimpleGUI as gui
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+# from hover.hover import *
 
 from modules import (draw_plot)
 
@@ -40,6 +41,7 @@ def draw_figure(figure, canvas):
     figure_canvas_agg.draw()
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
+
 
 
 def create_gui(theme):
