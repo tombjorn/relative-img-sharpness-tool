@@ -15,7 +15,6 @@ def main_hover():
     sc = plt.scatter(x,y,c=c, s=100, cmap=cmap, norm=norm)
 
     annot = ax.annotate("", xy=(0,0), xytext=(20,20),textcoords="offset points",
-                        bbox=dict(boxstyle="round", fc="w"),
                         arrowprops=dict(arrowstyle="->"))
     annot.set_visible(False)
 
@@ -61,5 +60,5 @@ def main_hover():
     return fig
     # plt.show()
 
-# fig = main_hover()
-# plt.show()
+fig = main_hover()
+plt.show()

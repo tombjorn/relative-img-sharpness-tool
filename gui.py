@@ -53,7 +53,8 @@ def create_gui(theme):
 
     exitCol = [[gui.Button('EXIT', font=AppFont)]]
 
-    layout = [[gui.Button("PICK A FOLDER", font=AppFont)],
+    layout = [[gui.Text("Threshold :", size=(0, 1), key="threshold"), gui.InputText()],
+            [gui.Button("PICK A FOLDER", font=AppFont)],
             [gui.Text("DIRECTORY PATH : ", key="DIR PATH",
                     justification='c', font=AppFont)],
             [gui.Button("SHOW PLOT", font=AppFont)],

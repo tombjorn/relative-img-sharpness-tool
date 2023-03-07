@@ -24,7 +24,7 @@ themes = { "LightBrown7" :
 def main():
     global pictures
     plot_generated = False
-    threshold = float(sys.argv[1])
+    # threshold = float(sys.argv[1])
     theme = 'LightBrown7'
     gui = create_gui(theme)
 
@@ -35,6 +35,7 @@ def main():
         # print(f'_VARS INSIDE WHILE LOOP: {gui}')
         event, values = gui['window'].read(timeout=200)
 
+
         if event == 'EXIT':
             # print('exit event')
             break
@@ -43,9 +44,10 @@ def main():
             path = askdirectory(title='Image directory')
             gui['window']['DIR PATH'].update(f'DIRECTORY PATH : {path}')
 
-        if event == "SHOW PLOT" and plot_generated == False:
-            print('Generating picture instance list')
-            try: 
+        if event == "SHOW PLOT":
+            threshold = float(values[0])
+            try:
+
                 pictures = generate_pictures(path)
                 sharp_m = mean(pictures)
                 sharp_s = std(pictures)
