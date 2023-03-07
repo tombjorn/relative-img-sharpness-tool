@@ -24,9 +24,9 @@ themes = { "LightBrown7" :
 def main():
     global pictures
     plot_generated = False
-    # threshold = float(sys.argv[1])
     theme = 'LightBrown7'
     gui = create_gui(theme)
+    tagged = False
 
     # print(f'_VARS RETURNED FROM CREATE_GUI() :{gui}')
     pictures = []
@@ -44,7 +44,7 @@ def main():
             path = askdirectory(title='Image directory')
             gui['window']['DIR PATH'].update(f'DIRECTORY PATH : {path}')
 
-        if event == "SHOW PLOT":
+        if event == "SHOW PLOT" and plot_generated == False:                
             threshold = float(values[0])
             try:
 
@@ -55,50 +55,19 @@ def main():
                 for p in pictures:
                     img = p['instance']
                     img.get_col(t=threshold, m=sharp_m, s=sharp_s)
-
-                generate_plot_fig(pictures, sharp_m, sharp_s, gui, face_col=themes[theme])
+                plot_generated = True
+                generate_plot_fig(pictures, sharp_m, sharp_s, gui, threshold, plot_generated, face_col=themes[theme])
                 plot_generated = True
             except UnboundLocalError:
                 traceback.print_exc()
-                
+        if event == "TAG FILES" and tagged == False and plot_generated == True:
+            for p in pictures:
+                p['instance'].tag_me()
+            tagged = True
+            
             
 
 
 
     return
-
-    # gui.close()
-
-    print('Generating picture instance list')
-    pictures = generate_pictures(path)
-
-    sharp_m = mean(pictures)
-    sharp_s = std(pictures)
-
-
-    print('Adding colour attribute')
-    for p in pictures:
-        img = p['instance']
-        img.get_col(t=threshold, m=sharp_m, s=sharp_s)
-
-    axes_data = format_axes(pictures)
-
-    print('Files tagging')
-    asyncio.run(tag_files(pictures))
-
-
-    print('Drawing Plot')
-    draw_plot(axes_data, sharp_m)
-
-    
-    print('DONE')
-
-
-
-# main(path, threshold)
-
 main()
-    
-
-
-# raise ValueError('A very specific bad thing happened.')

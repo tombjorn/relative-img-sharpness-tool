@@ -17,7 +17,6 @@ Image.warnings.simplefilter('error', Image.DecompressionBombWarning)
 # FUNCTIONS
 
 def generate_pictures(img_folder_path):
-
     pictures = []
 
     for file in os.listdir(img_folder_path):

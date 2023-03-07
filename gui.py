@@ -46,7 +46,6 @@ def draw_figure(figure, canvas):
 
 def create_gui(theme):
     _VARS = {'window' : False}
-    plot_generated = False
 
     AppFont = 'Any 16'
     gui.theme(theme)
@@ -58,6 +57,7 @@ def create_gui(theme):
             [gui.Text("DIRECTORY PATH : ", key="DIR PATH",
                     justification='c', font=AppFont)],
             [gui.Button("SHOW PLOT", font=AppFont)],
+            [gui.Button("TAG FILES", font=AppFont)],
             [gui.Canvas(key='figCanvas')],
             [gui.Column(exitCol, element_justification='right', expand_x=True)]
             ]
@@ -67,7 +67,9 @@ def create_gui(theme):
                                 resizable=True)
     return _VARS
 
-def generate_plot_fig(pictures, mean, std, window, face_col='#fff'):
+def generate_plot_fig(pictures, mean, std, window, thresh, plot_generated, face_col='#fff'):
+    if plot_generated:
+        window['window']['figCanvas'].TKCanvas.delete('all')
     data = format_axes(pictures)
     fig, ax = plt.subplots()
     ax.set_facecolor('black')
@@ -81,20 +83,19 @@ def generate_plot_fig(pictures, mean, std, window, face_col='#fff'):
         cont, ind = sc.contains(event)
         if cont:
             idx = ind["ind"][0]
-            # print(data['x'])
-            # print(data['y'])
-            print(pictures[idx])
+            # print(pictures[idx])
             open_image(pictures, idx)
             
 
-    plt.axhline(y=mean, c=face_col['acc'])
-    plt.axhline(y=mean - std, c='white', linestyle="dashed")
-    plt.axhline(y=mean + std, c='white', linestyle="dashed")
+    plt.axhline(y=mean, c=face_col['sec'])
+    plt.axhline(y=(mean + std) * thresh, c='white', linestyle="dashed")
     plt.xlabel("Picture Number", fontweight='bold', c=face_col['acc'])
     plt.ylabel("Relative Sharpness", fontweight='bold', c=face_col['acc'])
     plt.grid()
     fig.set_facecolor(face_col['main'])
     fig.canvas.mpl_connect("button_press_event", onClick)
+    # print('FIGURE : ')
+    # print(fig)
     draw_figure(fig, window['window']['figCanvas'].TKCanvas)
 
     
