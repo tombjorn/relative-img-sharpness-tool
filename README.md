@@ -21,6 +21,11 @@ References:
   Applied Sciences.
   Source : https://www.mdpi.com/2076-3417/12/13/6712/pdf
 
+Features:
+
+- Click on graph points to open corresponding image
+- Tag files once graphed, with the 'Tag Files' button
+
 TODO:
     - add mouse hover over graph points, index images by number, somehow able to open picture
         - could have a list selector to pick and open the picture by picture number in graph?
