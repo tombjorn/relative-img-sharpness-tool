@@ -45,7 +45,10 @@ def main():
             gui['window']['DIR PATH'].update(f'DIRECTORY PATH : {path}')
 
         if event == "SHOW PLOT" and plot_generated == False:                
-            threshold = float(values[0])
+            try :
+                threshold = float(values[0])
+            except ValueError:
+                pass
             try:
 
                 pictures = generate_pictures(path)
