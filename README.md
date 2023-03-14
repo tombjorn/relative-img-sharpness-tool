@@ -29,7 +29,8 @@ Sharpness measurement usually involves edge detection, often compared against a 
   Applied Sciences.
   Source : https://www.mdpi.com/2076-3417/12/13/6712/pdf
 
-TODO: - add mouse hover over graph points, index images by number, somehow able to open picture - could have a list selector to pick and open the picture by picture number in graph? - Figure out how to close with close red close button
+TODO:
 
-    - Add more themes, find a way to access the whole theme array.
-    - Add a method to move the focus of the algorithm
+- Add mouse hover over graph points, index images by number, somehow able to open picture - could have a list selector to pick and open the picture by picture number in graph? - Figure out how to close with close red close button
+- Add more themes, find a way to access the whole theme array.
+- Add a method to move the focus of the algorithm
